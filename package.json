@@ -1,0 +1,9 @@
+{
+  "name": "harken",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Landing conceitual do headset Harken (peça de portfólio)",
+  "scripts": {
+    "dev": "npx serve ."
+  }
+}

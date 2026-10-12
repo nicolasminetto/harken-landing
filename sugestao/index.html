@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Harken — tire o ruído, mantenha a voz</title>
+  <meta name="description" content="Harken: um headset conceitual com IA que remove ruídos específicos do ambiente das suas chamadas de vídeo. Nova sugestão de design (peça de portfólio)." />
+  <meta name="theme-color" content="#ECEDE9" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml" />
+  <link rel="preload" as="image" href="../assets/marca.webp" type="image/webp" />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #ECEDE9;
+      --panel: #E4E5E0;
+      --ink: #16191D;
+      --grey: #646a71;
+      --line: rgba(22, 25, 29, 0.14);
+      --line-strong: rgba(22, 25, 29, 0.28);
+      --signal: #E5402C;
+      --f: "Bricolage Grotesque", system-ui, sans-serif;
+      --edge: clamp(1.25rem, 4.5vw, 4.5rem);
+      --maxw: 78rem;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      background: var(--paper); color: var(--ink); font-family: var(--f);
+      font-weight: 450; line-height: 1.5; -webkit-font-smoothing: antialiased;
+      font-feature-settings: "ss01";
+    }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    :focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+    .wrap { max-width: var(--maxw); margin: 0 auto; padding-inline: var(--edge); }
+    .so { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+    /* medição / eixo */
+    .medida { font-size: 0.78rem; letter-spacing: 0.01em; color: var(--grey); font-variant-numeric: tabular-nums; }
+
+    /* ---------- topo ---------- */
+    .topo { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem;
+      padding-top: clamp(1.25rem, 3vw, 2rem); padding-bottom: 1.25rem; }
+    .marca { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; text-decoration: none; }
+    .topo nav { display: flex; gap: clamp(1rem, 2.5vw, 2rem); font-size: 0.95rem; color: var(--grey); }
+    .topo nav a { text-decoration: none; }
+    .topo nav a:hover { color: var(--ink); }
+    .btn-top { color: var(--paper); background: var(--ink); text-decoration: none; padding: 0.45rem 0.95rem;
+      border-radius: 2px; font-size: 0.92rem; font-weight: 600; }
+    @media (max-width: 680px) { .topo nav { display: none; } }
+
+    /* ---------- hero ---------- */
+    .hero { display: grid; grid-template-columns: 1fr; gap: clamp(1.5rem, 4vw, 2.5rem);
+      padding-top: clamp(1.5rem, 5vw, 4rem); border-top: 1px solid var(--line); }
+    @media (min-width: 860px) { .hero { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); align-items: center; } }
+
+    .titulo { font-weight: 700; letter-spacing: -0.03em; line-height: 0.98;
+      font-size: clamp(2.9rem, 8vw, 6rem); font-optical-sizing: auto; }
+    .titulo span { display: block; }
+    .titulo .l2 { color: var(--grey); } /* "mantenha a voz" em concreto — hierarquia, não enfeite */
+    .lede { max-width: 42ch; margin-top: clamp(1.1rem, 2.5vw, 1.6rem); font-size: clamp(1.05rem, 1.6vw, 1.22rem); color: #2b3036; }
+    .acoes { display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem; margin-top: clamp(1.5rem, 3vw, 2.25rem); }
+    .cta { background: var(--ink); color: var(--paper); text-decoration: none; font-weight: 600; font-size: 1rem;
+      padding: 0.85rem 1.5rem; border-radius: 2px; }
+    .cta:hover { background: #000; }
+    .link { text-decoration: none; font-weight: 600; border-bottom: 2px solid var(--ink); padding-bottom: 2px; }
+    .link:hover { border-color: var(--signal); }
+
+    /* produto sobre base medida */
+    .palco { position: relative; display: grid; justify-items: center; }
+    .palco img { width: min(100%, 440px); height: auto; filter: drop-shadow(0 30px 40px rgba(22, 25, 29, 0.18)); }
+    .base { width: 100%; margin-top: -0.5rem; }
+    .base-linha { height: 1px; background: var(--line-strong); position: relative; }
+    .base-ticks { display: flex; justify-content: space-between; margin-top: 6px; }
+    .base-ticks span { width: 1px; height: 7px; background: var(--line); }
+    .base-ticks span:first-child, .base-ticks span:last-child { height: 11px; background: var(--line-strong); }
+    .base-rot { display: flex; justify-content: space-between; margin-top: 7px; }
+
+    /* onda ruído -> voz (único momento de movimento) */
+    .onda-sec { padding-top: clamp(2rem, 5vw, 3.5rem); padding-bottom: clamp(2rem, 5vw, 3.5rem); }
+    .onda-cab { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 0.9rem; }
+    .onda-cab .vivo { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--signal); font-weight: 600; font-size: 0.9rem; }
+    .onda-cab .vivo::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--signal); }
+    canvas.onda { width: 100%; height: clamp(90px, 14vw, 150px); display: block; }
+
+    /* ---------- o que o Harken escuta (EQ bands) ---------- */
+    .escuta { padding-block: clamp(2.5rem, 6vw, 4.5rem); border-top: 1px solid var(--line); }
+    .escuta h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); font-weight: 700; letter-spacing: -0.02em; max-width: 24ch; }
+    .escuta p { max-width: 52ch; margin-top: 0.75rem; color: var(--grey); }
+    .bandas { display: grid; grid-template-columns: repeat(6, 1fr); gap: clamp(0.5rem, 1.5vw, 1rem); margin-top: clamp(1.75rem, 4vw, 2.75rem); }
+    @media (max-width: 680px) { .bandas { grid-template-columns: repeat(3, 1fr); row-gap: 1.75rem; } }
+    .banda { display: flex; flex-direction: column; gap: 0.6rem; }
+    .banda .med { height: clamp(90px, 16vw, 150px); display: flex; align-items: flex-end; gap: 3px; }
+    .banda .med i { flex: 1; background: var(--line-strong); border-radius: 1px; transform-origin: bottom; }
+    .banda .nome { font-weight: 600; }
+    .banda .hz { color: var(--grey); }
+
+    /* ---------- specs (tabela com fios, não cards) ---------- */
+    .specs { padding-block: clamp(2.5rem, 6vw, 4.5rem); border-top: 1px solid var(--line); }
+    .specs h2 { font-size: clamp(1.3rem, 2.6vw, 1.7rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+    .specs h2 em { font-style: normal; color: var(--grey); }
+    .tab { width: 100%; border-collapse: collapse; }
+    .tab tr { border-top: 1px solid var(--line); }
+    .tab tr:last-child { border-bottom: 1px solid var(--line); }
+    .tab th, .tab td { text-align: left; padding: 1rem 0.5rem 1rem 0; vertical-align: baseline; }
+    .tab th { width: 34%; font-weight: 500; color: var(--grey); }
+    .tab td { font-weight: 600; font-variant-numeric: tabular-nums; }
+
+    /* ---------- fecho ---------- */
+    .fecho { padding-block: clamp(3rem, 8vw, 6rem); border-top: 1px solid var(--line); }
+    .fecho h2 { font-size: clamp(2rem, 5vw, 3.4rem); font-weight: 700; letter-spacing: -0.03em; max-width: 16ch; line-height: 1.02; }
+    .fecho form { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.75rem; max-width: 30rem; }
+    .fecho input { flex: 1 1 14rem; min-height: 50px; padding: 0 1rem; border: 1px solid var(--line-strong);
+      border-radius: 2px; background: transparent; font: inherit; color: var(--ink); }
+    .fecho input::placeholder { color: var(--grey); }
+    .nota { margin-top: 0.9rem; color: var(--grey); font-size: 0.92rem; }
+
+    .rodape { border-top: 1px solid var(--line); padding-block: 1.75rem; display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; justify-content: space-between; color: var(--grey); font-size: 0.88rem; }
+
+    @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="topo">
+      <a class="marca" href="#">Harken</a>
+      <nav aria-label="Principal">
+        <a href="#escuta">O que ele escuta</a>
+        <a href="#specs">Ficha</a>
+      </nav>
+      <a class="btn-top" href="#lista">Entrar na lista</a>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <h1 class="titulo"><span>Tire o ruído.</span><span class="l2">Mantenha a voz.</span></h1>
+          <p class="lede">A IA do Harken reconhece a obra do vizinho, o trânsito na janela, o latido no quintal, e remove só esses ruídos das suas chamadas de vídeo, em tempo real.</p>
+          <div class="acoes">
+            <a class="cta" href="#lista">Entrar na lista de espera</a>
+            <a class="link" href="#onda">Ouvir antes e depois</a>
+          </div>
+        </div>
+        <figure class="palco">
+          <img src="../assets/marca.webp" width="997" height="1006" alt="Headset Harken com o logo h em vidro holográfico entre as conchas" />
+          <div class="base" aria-hidden="true">
+            <div class="base-linha"></div>
+            <div class="base-ticks"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="base-rot"><span class="medida">silêncio</span><span class="medida">voz</span><span class="medida">ambiente</span></div>
+          </div>
+        </figure>
+      </section>
+
+      <section class="onda-sec" id="onda">
+        <div class="onda-cab">
+          <span class="medida">Do ambiente para a sua chamada</span>
+          <span class="vivo">filtrando</span>
+        </div>
+        <canvas class="onda" width="1600" height="300" aria-label="Onda sonora do ambiente se achatando até sobrar só a voz"></canvas>
+      </section>
+
+      <section class="escuta" id="escuta">
+        <h2>Treinado para o barulho do dia a dia.</h2>
+        <p>Cada categoria é um modelo que o Harken reconhece e silencia sob demanda, sem mexer na sua voz.</p>
+        <div class="bandas" id="bandas">
+          <div class="banda"><div class="med" data-seed="7"></div><div><div class="nome">Obra</div><div class="hz medida">80–400 Hz</div></div></div>
+          <div class="banda"><div class="med" data-seed="3"></div><div><div class="nome">Trânsito</div><div class="hz medida">100–600 Hz</div></div></div>
+          <div class="banda"><div class="med" data-seed="9"></div><div><div class="nome">Latido</div><div class="hz medida">500–2k Hz</div></div></div>
+          <div class="banda"><div class="med" data-seed="5"></div><div><div class="nome">Buzina</div><div class="hz medida">400–3k Hz</div></div></div>
+          <div class="banda"><div class="med" data-seed="2"></div><div><div class="nome">Sirene</div><div class="hz medida">600–4k Hz</div></div></div>
+          <div class="banda"><div class="med" data-seed="8"></div><div><div class="nome">Multidão</div><div class="hz medida">200–2k Hz</div></div></div>
+        </div>
+      </section>
+
+      <section class="specs" id="specs">
+        <h2>Ficha técnica <em>conceitual</em></h2>
+        <table class="tab">
+          <tbody>
+            <tr><th scope="row">Bateria</th><td>36 horas com a IA ligada</td></tr>
+            <tr><th scope="row">Conexão</th><td>Bluetooth 5.3 e USB-C</td></tr>
+            <tr><th scope="row">Microfones</th><td>6, com captação do ambiente</td></tr>
+            <tr><th scope="row">App companion</th><td>Windows e macOS</td></tr>
+            <tr><th scope="row">Chamadas</th><td>Zoom, Meet e Teams</td></tr>
+            <tr><th scope="row">Peso</th><td>290 gramas</td></tr>
+          </tbody>
+        </table>
+        <p class="nota">Números ilustrativos de uma peça de portfólio, não medições reais.</p>
+      </section>
+
+      <section class="fecho" id="lista">
+        <h2>Deixe o mundo lá fora.</h2>
+        <form novalidate>
+          <label class="so" for="email">Seu e-mail</label>
+          <input id="email" type="email" inputmode="email" placeholder="seu@email.com" autocomplete="email" />
+          <button class="cta" type="submit">Quero ser avisado</button>
+        </form>
+        <p class="nota" data-msg aria-live="polite">Sem cobrança. É um protótipo de portfólio.</p>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <span>Harken — produto fictício, peça de portfólio.</span>
+      <span>Nova sugestão de design · Nícolas Minetto</span>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      var reduz = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // Onda: ruído (picos vermelhos) achatando até a voz (linha tinta). Um momento, no load.
+      var cv = document.querySelector("canvas.onda");
+      if (cv) {
+        var ctx = cv.getContext("2d");
+        var W = cv.width, H = cv.height, mid = H / 2;
+        function mistura(p) { // vermelho (ruído) -> tinta (voz)
+          var a = [0xE5, 0x40, 0x2C], b = [0x16, 0x19, 0x1D], t = Math.min(1, p * 1.25);
+          return "rgb(" + a.map(function (v, i) { return Math.round(v + (b[i] - v) * t); }).join(",") + ")";
+        }
+        function desenhar(p) { // p: 0 ruidoso -> 1 calmo; no repouso sobra a voz
+          ctx.clearRect(0, 0, W, H);
+          ctx.lineWidth = 3; ctx.lineJoin = "round"; ctx.lineCap = "round";
+          ctx.strokeStyle = mistura(p);
+          ctx.beginPath();
+          for (var x = 0; x <= W; x += 3) {
+            var f = x / W;
+            var local = Math.max(0, Math.min(1, (p - f * 0.35) / 0.65)); // ambiente (esq) silencia por último
+            var ruido = (1 - local) * (H * 0.38);
+            var voz = H * 0.08; // voz calma que permanece
+            var y = mid
+              + voz * Math.sin(f * 9 + 0.6)
+              + ruido * (Math.sin(f * 26 + 1) + 0.5 * Math.sin(f * 70 + 2) + 0.3 * Math.sin(f * 140))
+              + (1 - local) * (Math.random() - 0.5) * 9;
+            x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+          }
+          ctx.stroke();
+        }
+        if (reduz) { desenhar(1); }
+        else {
+          var t0 = null, dur = 1700;
+          function passo(t) {
+            if (t0 === null) t0 = t;
+            var p = Math.min(1, (t - t0) / dur);
+            desenhar(1 - Math.pow(1 - p, 3)); // easeOutCubic
+            if (p < 1) requestAnimationFrame(passo);
+          }
+          // começa quando a seção aparece
+          var io = new IntersectionObserver(function (e) {
+            if (e[0].isIntersecting) { io.disconnect(); requestAnimationFrame(passo); }
+          }, { threshold: 0.3 });
+          io.observe(cv);
+          desenhar(0);
+        }
+      }
+
+      // Barras das bandas (meídas estáticas, com uma leve subida quando entram)
+      document.querySelectorAll(".med").forEach(function (med) {
+        var seed = parseInt(med.dataset.seed || "5", 10);
+        for (var i = 0; i < 9; i++) {
+          var b = document.createElement("i");
+          var h = 0.2 + Math.abs(Math.sin(seed * 1.7 + i * 0.9)) * 0.8;
+          b.style.height = Math.round(h * 100) + "%";
+          med.appendChild(b);
+        }
+      });
+
+      // Form fake
+      var form = document.querySelector(".fecho form"), msg = document.querySelector("[data-msg]");
+      if (form) form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        var v = form.querySelector("input").value.trim();
+        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { msg.textContent = "Pronto, você entrou na lista (de mentira)."; msg.style.color = "var(--ink)"; form.querySelector("input").value = ""; }
+        else { msg.textContent = "Digite um e-mail válido para continuar."; msg.style.color = "var(--signal)"; }
+      });
+    })();
+  </script>
+</body>
+</html>
